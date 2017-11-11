@@ -15,16 +15,22 @@ import org.sonar.wsclient.issue.IssueClient;
 import org.sonar.wsclient.issue.IssueQuery;
 import org.sonar.wsclient.issue.Issues;
 import org.sonar.wsclient.rule.Rule;
+import org.springframework.beans.factory.annotation.Value;
 
 import br.com.relatorio.sonar.entidades.RuleProcessada;
 import br.com.relatorio.sonar.utils.Util;
 
-public class Principal {
-
-	private static SonarClient client;
-	private static IssueClient issueClient;
-	private static HSSFSheet sheet;
-	private static HSSFWorkbook workbook;
+/**
+ * Classe responsável por todo processamento do Sonar e Criação do arquivo Excel
+ * @author MARCOS
+ *
+ */
+public class Processamento {
+	
+	private SonarClient client;
+	private IssueClient issueClient;
+	private HSSFSheet sheet;
+	private HSSFWorkbook workbook;
 
 	// Não Mexer
 	private static final String LABEL_SEVERITIES = "severities";
@@ -33,15 +39,16 @@ public class Principal {
 	// Carregar com os possíveis valores. Pode colocar um ou mais de um
 	// ("BLOCKER | CRITICAL | MAJOR | MINOR | INFO")
 	private static String[] listaSeveridades = { "BLOCKER", "CRITICAL", "MAJOR" };
-	private static final String CAMINHO_ARQUIVO_GERADO = "C:/java/";
-	private static final String NOME_ARQUIVO = "RelatórioSonasr.xls";
-	private static final String URL_SONAR = "http://localhost:9000";
+	
+	private String caminhoGeracaoArquivo="C:/java/";
+	private String nomeArquivo = "RelatórioSonasr.xls";
+	private String urlSonar = "http://localhost:9000";
 
-	public static void main(String args[]) {
+	public void gerarArquivoSonar() {
 
-		System.out.println("Setando Configurações Iniciais");
+		System.out.println("Setando Configuracoes Iniciais");
 		configuracaoInicial();
-		String filename = CAMINHO_ARQUIVO_GERADO + NOME_ARQUIVO;
+		String filename = caminhoGeracaoArquivo + nomeArquivo;
 
 		try {
 			List<RuleProcessada> listaRuleUnificada = new ArrayList<RuleProcessada>();
@@ -82,7 +89,13 @@ public class Principal {
 
 	}
 
-	private static HSSFWorkbook createExcel(List<RuleProcessada> listRuleProcessada, HSSFSheet sheet) {
+	/**
+	 * Cria o arquivo excel.
+	 * @param listRuleProcessada
+	 * @param sheet
+	 * @return
+	 */
+	private HSSFWorkbook createExcel(List<RuleProcessada> listRuleProcessada, HSSFSheet sheet) {
 
 		Date dataGeracao = new Date();
 
@@ -103,17 +116,15 @@ public class Principal {
 			row.createCell(2).setCellValue(Util.formatarData(dataGeracao));
 			row.createCell(3).setCellValue(ruleProcessada.getSeveridade());
 		}
-
 		return workbook;
-
 	}
 
-	private static Issues getIssues(IssueQuery query) {
+	private Issues getIssues(IssueQuery query) {
 		Issues issues = issueClient.find(query);
 		return issues;
 	}
 
-	private static String getNameRule(List<Issues> listIssues, String keyRule) {
+	private String getNameRule(List<Issues> listIssues, String keyRule) {
 		String name = "";
 		for (Issues issueList : listIssues) {
 			for (Rule rule : issueList.rules())
@@ -126,7 +137,7 @@ public class Principal {
 		return name;
 	}
 
-	private static List<RuleProcessada> processarListaRule(List<Issues> listIssues, Issues issues, Object severidade) {
+	private List<RuleProcessada> processarListaRule(List<Issues> listIssues, Issues issues, Object severidade) {
 
 		HashMap<String, Integer> mapRuleProcessada = new HashMap<String, Integer>();
 
@@ -157,7 +168,13 @@ public class Principal {
 		return listaRuleProcessada;
 	}
 
-	private static List<Issues> obterDadosSonar(Issues informacoesIniciais, String severidade) {
+	/**
+	 * Obtém dados do Sonar de todas as páginas.
+	 * @param informacoesIniciais
+	 * @param severidade
+	 * @return
+	 */
+	private List<Issues> obterDadosSonar(Issues informacoesIniciais, String severidade) {
 
 		List<Issues> listIssues = new ArrayList<Issues>();
 
@@ -171,20 +188,23 @@ public class Principal {
 		}
 		return listIssues;
 	}
-
-	private static void configuracaoInicial() {
+	
+	/**
+	 * Seta as configurações iniciais para conectar ao sonar.
+	 */
+	private void configuracaoInicial() {
 
 		String login = "admin";
 		String password = "admin";
 
-		client = SonarClient.create(URL_SONAR);
+		client = SonarClient.create(urlSonar);
 		client.builder().login(login);
 		client.builder().password(password);
 
 		issueClient = client.issueClient();
 	}
 
-	private static HashMap<String, Integer> getRules(List<Issues> listIssues,
+	private HashMap<String, Integer> getRules(List<Issues> listIssues,
 			HashMap<String, Integer> mapRuleProcessada) {
 
 		for (Issues issueList : listIssues) {
@@ -192,7 +212,6 @@ public class Principal {
 				if (!mapRuleProcessada.containsKey(issue.ruleKey())) {
 					mapRuleProcessada.put(issue.ruleKey(), 0);
 				}
-
 			}
 		}
 		return mapRuleProcessada;

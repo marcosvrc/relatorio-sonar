@@ -2,6 +2,11 @@ package br.com.relatorio.sonar.entidades;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author MARCOS
+ *
+ */
 public class RuleProcessada implements Serializable{
 
 	private static final long serialVersionUID = 1L;
