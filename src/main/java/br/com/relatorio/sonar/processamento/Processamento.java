@@ -40,9 +40,14 @@ public class Processamento {
 	// ("BLOCKER | CRITICAL | MAJOR | MINOR | INFO")
 	private static String[] listaSeveridades = { "BLOCKER", "CRITICAL", "MAJOR" };
 	
-	private String caminhoGeracaoArquivo="C:/java/";
-	private String nomeArquivo = "RelatórioSonasr.xls";
-	private String urlSonar = "http://localhost:9000";
+	@Value("${caminho.relatorio}")
+	private String caminhoGeracaoArquivo;
+	
+	@Value("${nome.relatorio}")
+	private String nomeArquivo;
+	
+	@Value("${url.sonar}")
+	private String urlSonar;
 
 	public void gerarArquivoSonar() {
 
