@@ -1,5 +1,6 @@
 # relatorio-sonar
 Geração de Relatório do Sonar em Excel (Apache POI e Chamada Rest a Api do Sonar)
+<<<<<<< HEAD
 
 A seguir segue algumas configurações necessárias para a correta utilização deste gerador de relatório:
 
@@ -22,3 +23,5 @@ Para definir a severidade, basta configurar Constantes.LISTA_SEVERIDADES = { "BL
 5. Definir o usuário ADM do sonar. O default é "admin". Para configurar o caminho, basta alterar Constantes.USUARIO_ADM_SONAR.
 
 6. Definir a senha ADM do sonar.  O default é "admin". Para configurar o caminho, basta alterar Constantes.SENHA_ADM_SONAR.
+=======
+>>>>>>> 2a942e4c231f4a0a2406b0ed0ee7f1a1bd953040
