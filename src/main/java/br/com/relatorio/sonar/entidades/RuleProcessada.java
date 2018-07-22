@@ -3,21 +3,19 @@ package br.com.relatorio.sonar.entidades;
 import java.io.Serializable;
 
 /**
- * 
+ * Class RuleProcessada.
  * @author MARCOS
  *
  */
-public class RuleProcessada implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+public class RuleProcessada implements Serializable {
 
-	private String descricaoRule;
+    private static final long serialVersionUID = 1L;
 
-	private String keyRule;
-	
-	private int quantidadeOcorrencias;
-	
-	private String severidade;
+    private String descricaoRule;
+    private String keyRule;
+    private int quantidadeOcorrencias;
+    private String severidade;
 
 	public String getDescricaoRule() {
 		return descricaoRule;
