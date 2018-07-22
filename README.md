@@ -12,7 +12,7 @@ A seguir segue algumas configurações necessárias para a correta utilização 
 	d.  MINOR 
 	e.  INFO
 	
-Para definir a severidade, basta configurar Constantes.LISTA_SEVERIDADES = { "BLOCKER", "CRITICAL", "MAJOR" }, colocando uma ou mais severidades.
+	Para definir a severidade, basta configurar Constantes.LISTA_SEVERIDADES = { "BLOCKER", "CRITICAL", "MAJOR" }, colocando 	uma ou mais severidades.
 
 2. Definir o caminho da geração do arquivo xls. O default é C:/java/. Para configurar o caminho, basta alterar Constantes.CAMINHO_GERACAO_ARQUIVO.
 
