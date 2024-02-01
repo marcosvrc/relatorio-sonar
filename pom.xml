@@ -23,8 +23,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<apache.poi.version>4.1.1</apache.poi.version>
-		<sonar.version>5.1</sonar.version>
+    <apache.poi.version>5.2.1</apache.poi.version>
+    <sonar.version>5.1</sonar.version>
 		<apache.commons>4.2</apache.commons>
 	</properties>
 
