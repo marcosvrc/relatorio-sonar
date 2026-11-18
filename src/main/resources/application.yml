@@ -1,0 +1,25 @@
+spring:
+  main:
+    web-application-type: none
+    banner-mode: off
+    log-startup-info: false
+
+# Todas as chaves podem ser sobrescritas por variáveis de ambiente
+# (ex.: SONAR_URL, SONAR_TOKEN, SONAR_SEVERIDADES=BLOCKER,CRITICAL)
+# ou por argumentos (ex.: --sonar.projeto=meu-projeto).
+sonar:
+  url: ${SONAR_URL:http://localhost:9000}
+  # Nunca coloque o token aqui: use a variável de ambiente SONAR_TOKEN.
+  token: ${SONAR_TOKEN:}
+  severidades: BLOCKER,CRITICAL,MAJOR
+  somente-abertas: true
+  timeout: 30s
+
+relatorio:
+  diretorio: ./relatorios
+  nome-arquivo: RelatorioSonar.xlsx
+
+logging:
+  level:
+    root: warn
+    br.com.relatorio.sonar: info

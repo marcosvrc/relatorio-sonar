@@ -22,3 +22,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+### VS Code ###
+.vscode/
+
+### Relatórios gerados ###
+relatorios/
+*.xlsx
